@@ -7,7 +7,8 @@
 #define CHARACTERISTIC_UUID "05c4d03a-ac78-4627-8778-f23fab166ba8"
 #define fakevalue "1" // fake value for testing
 #define BUZZER_PIN 27
-#define LED 17 // GPIO pin for the buzzer
+#define LED1 17
+#define LED2 18 // GPIO pin for the buzzer
 
 
 class MyServerCallbacks : public BLEServerCallbacks {
@@ -31,18 +32,27 @@ class MyCallbacks : public BLECharacteristicCallbacks {
       if (value.compare("1") == 0){
         Serial.println("Masuk");
         digitalWrite(BUZZER_PIN, HIGH);
-        digitalWrite(LED, HIGH);
+        digitalWrite(LED1, HIGH);
         delay(500); // buzz for 500ms
         digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(LED1, LOW);
         Serial.println("Masuk selesai");
-      } else {
-        digitalWrite(LED, LOW);
+        
+      }
+      else if (value.compare("0") == 0){
+        Serial.println("Masuk");
+        digitalWrite(BUZZER_PIN, HIGH);
+        digitalWrite(LED2, HIGH);
+        delay(500); // buzz for 500ms
+        digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(LED2, LOW);
+        Serial.println("Masuk selesai");
+      } 
+      else {
         Serial.println("Kaga Masuk");
         digitalWrite(BUZZER_PIN, LOW);
-        digitalWrite(LED, HIGH);
         delay(250); // buzz for 500ms
         digitalWrite(BUZZER_PIN, LOW);
-        digitalWrite(LED, HIGH);
         delay(250); // buzz for 500ms
         digitalWrite(BUZZER_PIN, LOW);
         Serial.println("kaga masuk selesai");
@@ -54,7 +64,8 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 
 void setup() {
   pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(LED, OUTPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
   BLEDevice::init("ESP32_WS_Output");
