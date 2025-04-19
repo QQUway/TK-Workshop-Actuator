@@ -5,8 +5,9 @@
 
 #define SERVICE_UUID        "4869e6e5-dec6-4a9d-a0a4-eda6b5448b97"
 #define CHARACTERISTIC_UUID "05c4d03a-ac78-4627-8778-f23fab166ba8"
-
-#define BUZZER_PIN 27 // GPIO pin for the buzzer
+#define fakevalue "1" // fake value for testing
+#define BUZZER_PIN 27
+#define LED 17 // GPIO pin for the buzzer
 
 
 class MyServerCallbacks : public BLEServerCallbacks {
@@ -16,6 +17,7 @@ class MyServerCallbacks : public BLEServerCallbacks {
 
   void onDisconnect(BLEServer* pServer) {
     Serial.println("Client disconnected");
+    BLEDevice::startAdvertising();
   }
 };
 
@@ -23,19 +25,27 @@ class MyCallbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     std::string value = pCharacteristic->getValue();
 
-    Serial.print("Received Value: ");
-    Serial.println(value.c_str());
-
     if (value.length() > 0) {
-      Serial.print("Received Value: ");
       Serial.println(value.c_str());
 
-      if (value == "1") {
+      if (value.compare("1") == 0){
+        Serial.println("Masuk");
         digitalWrite(BUZZER_PIN, HIGH);
+        digitalWrite(LED, HIGH);
         delay(500); // buzz for 500ms
         digitalWrite(BUZZER_PIN, LOW);
+        Serial.println("Masuk selesai");
       } else {
+        digitalWrite(LED, LOW);
+        Serial.println("Kaga Masuk");
         digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(LED, HIGH);
+        delay(250); // buzz for 500ms
+        digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(LED, HIGH);
+        delay(250); // buzz for 500ms
+        digitalWrite(BUZZER_PIN, LOW);
+        Serial.println("kaga masuk selesai");
       }
     }
   }
@@ -43,9 +53,10 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 
 
 void setup() {
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(LED, OUTPUT);
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
-
   BLEDevice::init("ESP32_WS_Output");
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyServerCallbacks());
