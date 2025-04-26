@@ -1,5 +1,6 @@
 #include "abstractBLE\abstractBLE.hpp"
 #include "actuatorLogic\actuatorLogic.hpp"
+#include "configBLE.hpp"
 
 // class MyServerCallbacks : public BLEServerCallbacks
 // {

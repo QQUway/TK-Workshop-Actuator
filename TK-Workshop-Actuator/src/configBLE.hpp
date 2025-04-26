@@ -1,0 +1,3 @@
+#define NAME_OF_ESP_BLE "ESP_WS_Output"
+#define SERVICE_UUID "4869e6e5-dec6-4a9d-a0a4-eda6b5448b97"
+#define CHARACTERISTIC_UUID "05c4d03a-ac78-4627-8778-f23fab166ba8"
