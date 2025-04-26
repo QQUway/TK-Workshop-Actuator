@@ -1,5 +1,5 @@
 #include "abstractBLE\abstractBLE.hpp"
-
+#include "actuatorLogic\actuatorLogic.hpp"
 // #define SERVICE_UUID "4869e6e5-dec6-4a9d-a0a4-eda6b5448b97"
 // #define CHARACTERISTIC_UUID "05c4d03a-ac78-4627-8778-f23fab166ba8"
 // #define fakevalue "1" // fake value for testing
