@@ -1,11 +1,5 @@
 #include "abstractBLE\abstractBLE.hpp"
 #include "actuatorLogic\actuatorLogic.hpp"
-// #define SERVICE_UUID "4869e6e5-dec6-4a9d-a0a4-eda6b5448b97"
-// #define CHARACTERISTIC_UUID "05c4d03a-ac78-4627-8778-f23fab166ba8"
-// #define fakevalue "1" // fake value for testing
-// #define BUZZER_PIN 27
-// #define LED1 17
-// #define LED2 18 // GPIO pin for the buzzer
 
 // class MyServerCallbacks : public BLEServerCallbacks
 // {
@@ -72,10 +66,10 @@ void setup()
   pinMode(LED2, OUTPUT);
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
-  initializeServerBLE("BELE");
-  initializeService("4869e6e5-dec6-4a9d-a0a4-eda6b5448b97");
-  initializeCharacteristic("05c4d03a-ac78-4627-8778-f23fab166ba8");
-  advertiseBLE("4869e6e5-dec6-4a9d-a0a4-eda6b5448b97");
+  initializeServerBLE(NAME_OF_ESP_BLE);
+  initializeService(SERVICE_UUID);
+  initializeCharacteristic(CHARACTERISTIC_UUID);
+  advertiseBLE(SERVICE_UUID);
   Serial.println("Characteristic defined! Now you can read it in your phone!");
 }
 
