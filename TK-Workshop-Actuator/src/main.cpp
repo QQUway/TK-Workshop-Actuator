@@ -67,10 +67,10 @@ void setup()
   pinMode(LED2, OUTPUT);
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
-  initializeServerBLE(NAME_OF_ESP_BLE);
-  initializeService(SERVICE_UUID);
-  initializeCharacteristic(CHARACTERISTIC_UUID);
-  advertiseBLE(SERVICE_UUID);
+  initializeServerBLE(NAME_OF_ESP_BLE, bleServer);
+  initializeService(SERVICE_UUID, bleService, bleServer);
+  initializeCharacteristic(CHARACTERISTIC_UUID, bleCharacteristic, bleService);
+  advertiseBLE(SERVICE_UUID, bleAdvertising);
   Serial.println("Characteristic defined! Now you can read it in your phone!");
 }
 
