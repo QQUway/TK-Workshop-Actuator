@@ -9,20 +9,20 @@ void actuatorOnWriteLogic(std::string value)
         if (value.compare("1") == 0)
         {
             Serial.println("Masuk");
-            digitalWrite(BUZZER_PIN, HIGH);
+            tone(BUZZER_PIN, 175*2);
             digitalWrite(LED1, HIGH);
-            delay(500); // buzz for 500ms
-            digitalWrite(BUZZER_PIN, LOW);
+            delay(1000); // buzz for 500ms
+            analogWrite(BUZZER_PIN, 0);
             digitalWrite(LED1, LOW);
             Serial.println("Masuk selesai");
         }
         else if (value.compare("0") == 0)
         {
             Serial.println("Masuk");
-            digitalWrite(BUZZER_PIN, HIGH);
+            tone(BUZZER_PIN, 110);
             digitalWrite(LED2, HIGH);
-            delay(500); // buzz for 500ms
-            digitalWrite(BUZZER_PIN, LOW);
+            delay(1000); // buzz for 500ms
+            analogWrite(BUZZER_PIN, 0);
             digitalWrite(LED2, LOW);
             Serial.println("Masuk selesai");
         }
